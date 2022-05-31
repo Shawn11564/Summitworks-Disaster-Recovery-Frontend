@@ -1,1 +1,25 @@
-<p>login works!</p>
+<p>Login page</p>
+<form
+    *ngIf="!isLoggedIn"
+    name="form"
+    (ngSubmit)="f.form.valid && onSubmit()"
+    #f="ngForm"
+    novalidate
+>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input
+            #username="ngModel"
+            type="text"
+            class="form-control"
+            name="username"
+            [(ngModel)]="form.username"
+            required
+        />
+        <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && username.invalid"
+        >Username is required!</div>
+    </div>
+</form>

@@ -8,4 +8,5 @@ const API_URL = 'http://localhost:8080/api/user/';
 export class UserService {
 
   constructor() { }
+  
 }
