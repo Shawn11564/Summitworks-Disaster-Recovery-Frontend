@@ -10,7 +10,7 @@ import { TokenStorageService } from '../_services/token-storage.service';
 export class LoginComponent implements OnInit {
 
   form: any = {};
-  isLoggedIn = false;
+  isLoggedIn = !!this.tokenStorage.getToken();;
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
@@ -27,10 +27,9 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.authService.login(this.form).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
+        this.tokenStorage.saveToken(data.token);
+        this.tokenStorage.saveUser(data.token);
 
-        this.isLoggedIn = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
         this.reloadPage();
@@ -42,7 +41,7 @@ export class LoginComponent implements OnInit {
   }
 
   reloadPage(): void {
-    window.location.reload();
+    window.location.href = "/"
   }
 
 }

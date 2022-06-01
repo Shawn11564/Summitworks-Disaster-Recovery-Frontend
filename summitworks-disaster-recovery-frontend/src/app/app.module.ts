@@ -9,6 +9,11 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminComponent } from './admin/admin.component';
+import { ContractorComponent } from './contractor/contractor.component';
+import { ManagementComponent } from './management/management.component';
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { SiteobjectComponent } from './siteobject/siteobject.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +21,11 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AdminComponent,
+    ContractorComponent,
+    ManagementComponent,
+    SiteobjectComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 <div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">Summitworks</a>
+    <a href="#" class="navbar-brand">&nbsp;Summitworks</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       
       <li class="nav-item">
@@ -22,6 +22,10 @@
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+
+      <li class="nav-item">
+        <a href class="nav-link" routerLink="management">User Management</a>
+      </li>
 
       <li class="nav-item">
         <a href class="nav-link" (click)="logout()">Logout</a>

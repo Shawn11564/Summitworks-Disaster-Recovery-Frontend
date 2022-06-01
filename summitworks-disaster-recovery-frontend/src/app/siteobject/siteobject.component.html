@@ -1,0 +1,49 @@
+<div class="container">
+    <button
+         class="btn btn-primary"
+         (click)="refresh()"
+    >Refresh</button>
+    <div class="float-end">
+        <button
+            class="btn btn-success"
+            (click)="createObject()"
+        >Add +</button>
+    </div>
+    <table *ngIf="objects.length != 0; else noTable" class="table table-dark">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Username</td>
+                <td>Email</td>
+                <td>Roles</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let obj of objects;
+                                let o = odd;
+                                let e = even;"
+                [ngClass]="{ 'odd-line': o, 'even-line': e}">
+                <td>{{obj.id}}</td>
+                <td>
+                    <button
+                        class="btn btn-primary"
+                    >View</button>
+                    &nbsp;
+                    <button
+                        class="btn btn-warning"
+                        (click)="edit(obj.id)"
+                    >Edit</button>
+                    &nbsp;
+                    <button
+                        class="btn btn-danger"
+                        (click)="delete(obj.id)"
+                    >Delete</button>
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #noTable>
+        No site objects found!
+    </ng-template>
+</div>
