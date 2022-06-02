@@ -3,19 +3,20 @@ import { FormBuilder } from '@angular/forms';
 import { SiteobjectService } from '../_services/siteobject.service';
 
 @Component({
-  selector: 'app-siteobject',
-  templateUrl: './siteobject.component.html',
-  styleUrls: ['./siteobject.component.css']
+  selector: 'app-timesheet',
+  templateUrl: './timesheet.component.html',
+  styleUrls: ['./timesheet.component.css']
 })
-export class SiteobjectComponent implements OnInit {
+export class TimesheetComponent implements OnInit {
+
 
   form: any = {};
   objects: any = []
 
-  objectForm = this.formBuilder.group({
-    code: '',
-    type: '',
-    description: '',
+  timesheetForm = this.formBuilder.group({
+    id: '',
+    contractorName: '',
+    siteCode: '',
     hourlyRate: '',
     maxHoursPerDay: ''
   });
@@ -24,11 +25,10 @@ export class SiteobjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.closeForm();
-    this.refresh();
   }
 
   onSubmit(): void {
-    this.objectService.createObject(this.objectForm.value).subscribe(
+    this.objectService.createObject(this.timesheetForm.value).subscribe(
       data => {
         this.closeForm();
         this.refresh();
@@ -36,7 +36,7 @@ export class SiteobjectComponent implements OnInit {
         alert('Error saving object: ' + err.error.message);
       }
     )
-    this.objectForm.reset();
+    this.timesheetForm.reset();
   }
 
   openForm(): void {
@@ -50,7 +50,7 @@ export class SiteobjectComponent implements OnInit {
   createObject(): void {
 
   }
-  
+
   refresh(): void {
     this.objectService.getUsers().subscribe(
       data => {
@@ -60,7 +60,7 @@ export class SiteobjectComponent implements OnInit {
   }
 
   edit(id: any): void {
-    
+
   }
 
   delete(id: any): void {

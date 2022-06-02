@@ -18,8 +18,22 @@ export class SiteobjectService {
     return this.http.get(OBJECTS_API + 'all', HTTP_OPTIONS);
   }
 
-  getObject(id: number): Observable<any> {
-    return this.http.get(OBJECTS_API + '')
+  getObject(id: string): Observable<any> {
+    return this.http.get(OBJECTS_API + 'object/' + id, HTTP_OPTIONS)
+  }
+
+  deleteObject(id: string): Observable<any> {
+    return this.http.delete(OBJECTS_API + 'delete/' + id, HTTP_OPTIONS);
+  }
+
+  createObject(obj: any): Observable<any> {
+    return this.http.post(OBJECTS_API + 'create', {
+      code: obj.code,
+      type: obj.type,
+      description: obj.description,
+      hourlyRate: obj.hourlyRate,
+      maxHoursPerDay: obj.maxHoursPerDay
+    }, HTTP_OPTIONS);
   }
 
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,7 @@ import { ContractorComponent } from './contractor/contractor.component';
 import { ManagementComponent } from './management/management.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { SiteobjectComponent } from './siteobject/siteobject.component';
+import { TimesheetComponent } from './timesheet/timesheet.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +26,14 @@ import { SiteobjectComponent } from './siteobject/siteobject.component';
     AdminComponent,
     ContractorComponent,
     ManagementComponent,
-    SiteobjectComponent
+    SiteobjectComponent,
+    TimesheetComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [authInterceptorProviders],

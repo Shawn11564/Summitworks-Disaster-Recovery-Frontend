@@ -13,7 +13,9 @@ export class ManagementComponent implements OnInit {
 
   constructor(private managementService: ManagementService, private token: TokenStorageService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.refresh();
+  }
 
   refresh(): void {
     this.managementService.getUsers().subscribe(

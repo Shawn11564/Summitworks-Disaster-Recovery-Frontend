@@ -18,8 +18,22 @@ export class TimesheetService {
     return this.http.get(TIMESHEET_API + 'all', HTTP_OPTIONS);
   }
 
-  getTimesheet(id: number): Observable<any> {
+  getTimesheet(id: string): Observable<any> {
     return this.http.get(TIMESHEET_API + 'timesheet/' + id, HTTP_OPTIONS);
   }
+
+  deleteObject(id: string): Observable<any> {
+    return this.http.delete(TIMESHEET_API + 'delete/' + id, HTTP_OPTIONS);
+  }
+
+  // createObject(obj: any): Observable<any> {
+  //   return this.http.post(TIMESHEET_API + 'create', {
+  //     code: obj.code,
+  //     type: obj.type,
+  //     description: obj.description,
+  //     hourlyRate: obj.hourlyRate,
+  //     maxHoursPerDay: obj.maxHoursPerDay
+  //   }, HTTP_OPTIONS);
+  // }
 
 }
