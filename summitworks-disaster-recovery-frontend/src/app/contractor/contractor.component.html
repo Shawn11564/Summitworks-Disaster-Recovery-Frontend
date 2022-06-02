@@ -14,12 +14,86 @@
                 <label for="date">Date</label>
                 <input class="form-control" id="date" type="text" formControlName="date" required>
             </div>
-            <div class="form-group" id="jobs">
-                <h3>Labor Entry</h3>
-                <ng-form name="jobForm" [formGroup]="jobForm">
-                    <label for="jobOne">Job One</label>
-                </ng-form>
+            <style>
+                #labor {
+                    display: flex;
+                }
+                #labor div {
+                    align-items: left;
+                    margin: 20px;
+                    width: 100%;
+                }
+            </style>
+            <h3>Labor Entry</h3>
+            <!-- Jobs -->
+            <div class="form-group" id="labor">
+                <div class="d-flex flex-column">
+                    <h4>Job One</h4>
+                    <select ng-model="jobOneCode">
+                        <option [ngValue]="null" disabled>Code</option>
+                        <option *ngFor="let code of jobs" [ngValue]="code">{{code}}</option>
+                    </select>
+                    <label for="jobOneHours">Hours Worked</label>
+                    <input class="form-control" id="jobOneHours" type="number" formControlName="jobOneHours">
+                    &nbsp;
+                </div>
+                <div class="d-flex flex-column">
+                    <h4>Job Two</h4>
+                    <select ng-model="jobTwoCode">
+                        <option [ngValue]="null" disabled>Code</option>
+                        <option *ngFor="let code of jobs" [ngValue]="code">{{code}}</option>
+                    </select>
+                    <label for="jobTwoHours">Hours Worked</label>
+                    <input class="form-control" id="jobTwoHours" type="number" formControlName="jobTwoHours">
+                    &nbsp;
+                </div>
+                <div class="d-flex flex-column">
+                    <h4>Job Three</h4>
+                    <select ng-model="jobThreeCode">
+                        <option [ngValue]="null" disabled>Code</option>
+                         <option *ngFor="let code of jobs" [ngValue]="code">{{code}}</option>
+                    </select>
+                    <label for="jobThreeHours">Hours Worked</label>
+                    <input class="form-control" id="jobThreeHours" type="number" formControlName="jobThreeHours">
+                </div>
+            </div>
+            <!-- Machines -->
+            <div class="form-group" id="labor">
+                <div class="d-flex flex-column">
+                    <h4>Machine One</h4>
+                    <select ng-model="machineOneCode">
+                        <option [ngValue]="null" disabled>Code</option>
+                        <option *ngFor="let code of machines" [ngValue]="code">{{code}}</option>
+                    </select>
+                    <label for="machineOneHours">Hours Used</label>
+                    <input class="form-control" id="machineOneHours" type="number" formControlName="machineOneHours">
+                    &nbsp;
+                </div>
+                <div class="d-flex flex-column">
+                    <h4>Machine Two</h4>
+                    <select ng-model="machineTwoCode">
+                        <option [ngValue]="null" disabled>Code</option>
+                        <option *ngFor="let code of machines" [ngValue]="code">{{code}}</option>
+                    </select>
+                    <label for="machineTwoHours">Hours Used</label>
+                    <input class="form-control" id="machineTwoHours" type="number" formControlName="machineTwoHours">
+                    &nbsp;
+                </div>
+                <div class="d-flex flex-column">
+                    <h4>Machine Three</h4>
+                    <select ng-model="machineThreeCode">
+                        <option [ngValue]="null" disabled>Code</option>
+                        <option *ngFor="let code of machines" [ngValue]="code">{{code}}</option>
+                    </select>
+                    <label for="machineThreeHours">Hours Used</label>
+                    <input class="form-control" id="machineThreeHours" type="number" formControlName="machineThreeHours">
+                </div>
             </div>
         </form>
+    </div>
+    <div class="float-end">
+        <button class="btn btn-success" (click)="clearForm()">Submit</button>
+        &nbsp;
+        <button class="btn btn-danger" (click)="clearForm()">Clear</button>
     </div>
 </div>
