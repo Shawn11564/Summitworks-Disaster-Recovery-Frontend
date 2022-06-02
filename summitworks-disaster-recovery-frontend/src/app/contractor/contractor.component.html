@@ -1,1 +1,25 @@
-<p>contractor works!</p>
+<div class="container">
+    <h1>Timesheet Submission</h1>
+    <div class="form" id="form">
+        <form [formGroup]="timesheetForm">
+            <div class="form-group">
+                <label for="siteCode">Site Code</label>
+                <input class="form-control" id="siteCode" type="text" formControlName="siteCode" required>
+            </div>
+            <div class="form-group">
+                <label for="contractor">Contractor</label>
+                <input class="form-control" id="contractor" type="text" formControlName="contractor" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input class="form-control" id="date" type="text" formControlName="date" required>
+            </div>
+            <div class="form-group" id="jobs">
+                <h3>Labor Entry</h3>
+                <ng-form name="jobForm" [formGroup]="jobForm">
+                    <label for="jobOne">Job One</label>
+                </ng-form>
+            </div>
+        </form>
+    </div>
+</div>

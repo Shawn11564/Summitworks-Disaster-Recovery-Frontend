@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContractorComponent } from './contractor/contractor.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ManagementComponent } from './management/management.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'management', component: ManagementComponent },
   { path: 'siteobjects', component: SiteobjectComponent },
   { path: 'timesheets', component: TimesheetComponent },
+  { path: 'contractor', component: ContractorComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ]

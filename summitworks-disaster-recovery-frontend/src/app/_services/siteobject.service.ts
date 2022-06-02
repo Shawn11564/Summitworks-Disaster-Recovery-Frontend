@@ -14,7 +14,7 @@ export class SiteobjectService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<any> {
+  getObjects(): Observable<any> {
     return this.http.get(OBJECTS_API + 'all', HTTP_OPTIONS);
   }
 
@@ -23,7 +23,7 @@ export class SiteobjectService {
   }
 
   deleteObject(id: string): Observable<any> {
-    return this.http.delete(OBJECTS_API + 'delete/' + id, HTTP_OPTIONS);
+    return this.http.delete(OBJECTS_API + 'admin/delete/' + id, HTTP_OPTIONS);
   }
 
   createObject(obj: any): Observable<any> {

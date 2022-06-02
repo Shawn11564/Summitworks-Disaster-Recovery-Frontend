@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from './token-storage.service';
 
-const USERS_API = 'http://localhost:8080/api/users/admin';
+const USERS_API = 'http://localhost:8080/api/users/admin/';
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };

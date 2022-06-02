@@ -52,7 +52,7 @@ export class SiteobjectComponent implements OnInit {
   }
   
   refresh(): void {
-    this.objectService.getUsers().subscribe(
+    this.objectService.getObjects().subscribe(
       data => {
         this.objects = data;
       }, err => {

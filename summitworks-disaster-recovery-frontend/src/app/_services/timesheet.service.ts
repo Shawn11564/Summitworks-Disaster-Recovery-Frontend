@@ -15,7 +15,7 @@ export class TimesheetService {
   constructor(private http: HttpClient) { }
 
   getAllTimesheets(): Observable<any> {
-    return this.http.get(TIMESHEET_API + 'all', HTTP_OPTIONS);
+    return this.http.get(TIMESHEET_API + 'admin/all', HTTP_OPTIONS);
   }
 
   getTimesheet(id: string): Observable<any> {
@@ -23,7 +23,7 @@ export class TimesheetService {
   }
 
   deleteTimesheet(id: string): Observable<any> {
-    return this.http.delete(TIMESHEET_API + 'delete/' + id, HTTP_OPTIONS);
+    return this.http.delete(TIMESHEET_API + 'admin/delete/' + id, HTTP_OPTIONS);
   }
 
   addSiteObjectToTimesheet(timesheetId: string, siteobjectId: string): Observable<any> {

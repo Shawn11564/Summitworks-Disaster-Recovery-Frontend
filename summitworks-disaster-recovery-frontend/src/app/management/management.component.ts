@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ManagementService } from '../_services/management.service';
+import { SettingsService } from '../_services/settings.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class ManagementComponent implements OnInit {
 
   users: any = [];
 
-  constructor(private managementService: ManagementService, private token: TokenStorageService) { }
+  constructor(private managementService: ManagementService, private token: TokenStorageService, private settings: SettingsService) { }
 
   ngOnInit(): void {
     this.refresh();
@@ -55,4 +56,8 @@ export class ManagementComponent implements OnInit {
     return this.token.getUser().id == id;
   }
 
+  showAdminPages(): boolean {
+    return this.settings.showAdminPages();
+  }
+ 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-contractor',
@@ -7,7 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContractorComponent implements OnInit {
 
-  constructor() { }
+  timesheetForm = this.formBuilder.group({
+    siteCode: '',
+    contractor: '',
+    date: '',
+    jobEntries: '',
+    machineEntries: ''
+  });
+
+  jobForm = this.formBuilder.group({
+    jobOneCode: '',
+    jobOneHours: '',
+    jobTwoCode: '',
+    jobTwoHours: '',
+    jobThreeCode: '',
+    jobThreeHours: '',
+  })
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }
