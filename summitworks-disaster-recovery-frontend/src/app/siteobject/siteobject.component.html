@@ -26,9 +26,9 @@
                                 let e = even;"
                 [ngClass]="{ 'odd-line': o, 'even-line': e}">
                 <td>{{obj.code}}</td>
-                <td>{{obj.type}}</td>
+                <td>{{obj.type == 1 ? "Job" : "Machine"}}</td>
                 <td>{{obj.description}}</td>
-                <td>{{obj.hourlyRate}}</td>
+                <td>{{obj.hourlyRate | currency}}</td>
                 <td>{{obj.maxHoursPerDay}}</td>
                 <td>
                     <button

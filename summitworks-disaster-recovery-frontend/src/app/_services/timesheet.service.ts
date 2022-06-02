@@ -22,8 +22,12 @@ export class TimesheetService {
     return this.http.get(TIMESHEET_API + 'timesheet/' + id, HTTP_OPTIONS);
   }
 
-  deleteObject(id: string): Observable<any> {
+  deleteTimesheet(id: string): Observable<any> {
     return this.http.delete(TIMESHEET_API + 'delete/' + id, HTTP_OPTIONS);
+  }
+
+  addSiteObjectToTimesheet(timesheetId: string, siteobjectId: string): Observable<any> {
+    return this.http.post(TIMESHEET_API + 'timesheet/' + timesheetId + "/add/" + siteobjectId, HTTP_OPTIONS);
   }
 
   // createObject(obj: any): Observable<any> {

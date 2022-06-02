@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
 
   private roles: string[] = [];
   isLoggedIn = false;
+  showAdminPages = false;
   username: string = '';
 
   constructor(private tokenStorageService: TokenStorageService, private router: Router) { }
@@ -22,6 +23,8 @@ export class AppComponent implements OnInit {
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
+
+      this.showAdminPages = this.roles.includes('ADMIN');
 
       this.username = user.username;
     }

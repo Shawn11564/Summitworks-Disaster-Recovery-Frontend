@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { SiteobjectService } from '../_services/siteobject.service';
+import { TimesheetService } from '../_services/timesheet.service';
 
 @Component({
   selector: 'app-timesheet',
@@ -21,22 +21,22 @@ export class TimesheetComponent implements OnInit {
     maxHoursPerDay: ''
   });
 
-  constructor(private objectService: SiteobjectService, private formBuilder: FormBuilder) { }
+  constructor(private timesheetService: TimesheetService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.closeForm();
   }
 
   onSubmit(): void {
-    this.objectService.createObject(this.timesheetForm.value).subscribe(
-      data => {
-        this.closeForm();
-        this.refresh();
-      }, err => {
-        alert('Error saving object: ' + err.error.message);
-      }
-    )
-    this.timesheetForm.reset();
+    // this.timesheetService.createObject(this.timesheetForm.value).subscribe(
+    //   data => {
+    //     this.closeForm();
+    //     this.refresh();
+    //   }, err => {
+    //     alert('Error saving object: ' + err.error.message);
+    //   }
+    // )
+    // this.timesheetForm.reset();
   }
 
   openForm(): void {
@@ -52,9 +52,11 @@ export class TimesheetComponent implements OnInit {
   }
 
   refresh(): void {
-    this.objectService.getUsers().subscribe(
+    this.timesheetService.getAllTimesheets().subscribe(
       data => {
         this.objects = data;
+      }, err => {
+        alert('Error: ' + err.error.message);
       }
     );
   }
@@ -63,10 +65,22 @@ export class TimesheetComponent implements OnInit {
 
   }
 
-  delete(id: any): void {
-    this.objectService.deleteObject(id).subscribe(
+  addSiteObjectToTimesheet(timesheetId: string, siteobjectId: string) {
+    this.timesheetService.addSiteObjectToTimesheet(timesheetId, siteobjectId).subscribe(
       data => {
         this.refresh();
+      }, err => {
+        alert('Error: ' + err.error.message);
+      }
+    )
+  }
+
+  delete(id: any): void {
+    this.timesheetService.deleteTimesheet(id).subscribe(
+      data => {
+        this.refresh();
+      }, err => {
+        alert('Error: ' + err.error.message);
       }
     )
   }

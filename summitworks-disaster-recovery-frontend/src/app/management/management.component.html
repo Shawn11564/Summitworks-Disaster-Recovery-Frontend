@@ -9,49 +9,54 @@
             (click)="addRow()"
         >Add +</button>
     </div> -->
-    <table *ngIf="users.length != 0; else noTable" class="table table-dark">
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>Username</td>
-                <td>Email</td>
-                <td>Roles</td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users;
-                                let o = odd;
-                                let e = even;"
-                [ngClass]="{ 'odd-line': o, 'even-line': e}">
-                <td>{{user.id}}</td>
-                <td>{{user.username}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.roles | json}}</td>
-                <td>
-                    <button
-                        class="btn btn-primary"
-                    >View</button>
-                    &nbsp;
-                    <button
-                        class="btn btn-warning"
-                        (click)="edit(user.id)"
-                    >Edit</button>
-                    &nbsp;
-                    <button
-                        class="btn btn-danger"
-                        (click)="delete(user.id)"
-                    >Delete</button>
-                    &nbsp;
-                    <button
-                        class="btn btn-success"
-                        (click)="admin(user)"
-                    >Make Admin</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <ng-template #noTable>
-        No users found!
+    <div *ngIf="showAdminPages; else noPerms">
+        <table *ngIf="users.length != 0; else noTable" class="table table-dark">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Username</td>
+                    <td>Email</td>
+                    <td>Roles</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users;
+                                    let o = odd;
+                                    let e = even;"
+                    [ngClass]="{ 'odd-line': o, 'even-line': e}">
+                    <td>{{user.id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.roles | json}}</td>
+                    <td>
+                        <button
+                            class="btn btn-primary"
+                        >View</button>
+                        &nbsp;
+                        <button
+                            class="btn btn-warning"
+                            (click)="edit(user.id)"
+                        >Edit</button>
+                        &nbsp;
+                        <button
+                            class="btn btn-danger"
+                            (click)="delete(user.id)"
+                        >Delete</button>
+                        &nbsp;
+                        <button
+                            class="btn btn-success"
+                            (click)="admin(user)"
+                        >Make Admin</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ng-template #noTable>
+            No users found!
+        </ng-template>
+    </div>
+    <ng-template #noPerms>
+        You aren't authorized to view this page!
     </ng-template>
 </div>

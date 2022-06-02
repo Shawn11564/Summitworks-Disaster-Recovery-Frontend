@@ -55,6 +55,8 @@ export class SiteobjectComponent implements OnInit {
     this.objectService.getUsers().subscribe(
       data => {
         this.objects = data;
+      }, err => {
+        alert('Error: ' + err.error.message);
       }
     );
   }
@@ -67,6 +69,8 @@ export class SiteobjectComponent implements OnInit {
     this.objectService.deleteObject(id).subscribe(
       data => {
         this.refresh();
+      }, err => {
+        alert('Error: ' + err.error.message);
       }
     )
   }

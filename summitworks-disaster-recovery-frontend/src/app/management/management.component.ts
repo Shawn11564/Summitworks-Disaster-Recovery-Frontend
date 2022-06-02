@@ -21,6 +21,8 @@ export class ManagementComponent implements OnInit {
     this.managementService.getUsers().subscribe(
       data => {
         this.users = data;
+      }, err => {
+        alert('Error: ' + err.error.message);
       }
     );
   }
@@ -33,6 +35,8 @@ export class ManagementComponent implements OnInit {
     this.managementService.deleteUser(+id).subscribe(
       data => {
         this.refresh();
+      }, err => {
+        alert('Error: ' + err.error.message);
       }
     )
   }
@@ -41,7 +45,9 @@ export class ManagementComponent implements OnInit {
     this.managementService.makeAdmin(+user.id).subscribe(
      data => {
       alert('User: ' + user.username + ' is now an Admin!');
-     }
+      }, err => {
+        alert('Error: ' + err.error.message);
+      }
     )
   }
 

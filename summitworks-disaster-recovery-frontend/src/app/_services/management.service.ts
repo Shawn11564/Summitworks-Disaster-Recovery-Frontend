@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from './token-storage.service';
 
-const USERS_API = 'http://localhost:8080/api/users/';
+const USERS_API = 'http://localhost:8080/api/users/admin';
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -24,7 +24,7 @@ export class ManagementService {
   }
 
   makeAdmin(id: number): Observable<any> {
-    return this.http.put(USERS_API + 'admin/' + id, HTTP_OPTIONS);
+    return this.http.put(USERS_API + 'makeadmin/' + id, HTTP_OPTIONS);
   }
 
   isUser(id: number): boolean {
