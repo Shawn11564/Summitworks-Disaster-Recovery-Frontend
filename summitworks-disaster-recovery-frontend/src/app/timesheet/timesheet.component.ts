@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { SiteobjectService } from '../_services/siteobject.service';
 import { TimesheetService } from '../_services/timesheet.service';
 
 @Component({
@@ -9,80 +9,85 @@ import { TimesheetService } from '../_services/timesheet.service';
 })
 export class TimesheetComponent implements OnInit {
 
-
-  form: any = {};
-  objects: any = []
-
-  timesheetForm = this.formBuilder.group({
-    id: '',
-    contractorName: '',
-    siteCode: '',
-    hourlyRate: '',
-    maxHoursPerDay: ''
-  });
-
-  constructor(private timesheetService: TimesheetService, private formBuilder: FormBuilder) { }
+  rawTimesheets: any = [];
+  timesheets = new Map<string, any>();
+  costs = new Map<string, any>();
+  dataObjects = new Map<string, any>();
+  constructor(private timesheetService: TimesheetService, private siteobjects: SiteobjectService) { }
 
   ngOnInit(): void {
-    this.closeForm();
-  }
-
-  onSubmit(): void {
-    // this.timesheetService.createObject(this.timesheetForm.value).subscribe(
-    //   data => {
-    //     this.closeForm();
-    //     this.refresh();
-    //   }, err => {
-    //     alert('Error saving object: ' + err.error.message);
-    //   }
-    // )
-    // this.timesheetForm.reset();
-  }
-
-  openForm(): void {
-    document.getElementById("form")!.style.display = "block";
-  }
-
-  closeForm(): void {
-    document.getElementById("form")!.style.display = "none";
-  }
-
-  createObject(): void {
-
+    this.refresh();
   }
 
   refresh(): void {
     this.timesheetService.getAllTimesheets().subscribe(
       data => {
-        this.objects = data;
+        console.log('refreshing...');
+        this.rawTimesheets = data;
+        this.loadData();
       }, err => {
         alert('Error: ' + err.error.message);
+      }
+    )
+  }
+
+  loadData() {
+    this.dataObjects.clear();
+    this.costs.clear();
+    for (let i = 0; i < this.rawTimesheets.length; i++) {
+      let timesheet = this.rawTimesheets[i];
+      this.timesheets.set(timesheet.id, timesheet);
+      this.timesheetService.getTimesheetCost(timesheet.id).subscribe(
+        data => {
+          this.costs.set(timesheet.id, data);
+        }
+      );
+    }
+  }
+
+  getTotalHours(timesheedId: string): number {
+    let total = 0;
+    for (let i = 0; i < this.timesheets.get(timesheedId).siteObject.length; i++) {
+      total += this.timesheets.get(timesheedId).siteObject[i].hoursWorked;
+    }
+    return total;
+  }
+
+  getTotalCost(timesheedId: string): number {
+    return this.costs.get(timesheedId);
+  }
+
+  getDataObjects(timesheetId: string) {
+    return this.dataObjects.get(timesheetId);
+  }
+
+  getDataByType(timesheetId: string, type: number) {
+    let typed: any = [];
+    let data = this.dataObjects.get(timesheetId);
+    for (let i = 0; i < data.length; i++) {
+      let obj = data[i];
+      if (obj.type == type) {
+        typed.push(data);
+      }
+    }
+
+    return typed;
+  }
+
+  approve(timesheetId: string) {
+    this.timesheetService.approveTimesheet(timesheetId).subscribe(
+      data => {
+        this.refresh();
       }
     );
   }
-
-  edit(id: any): void {
-
-  }
-
-  addSiteObjectToTimesheet(timesheetId: string, siteobjectId: string) {
-    this.timesheetService.addSiteObjectToTimesheet(timesheetId, siteobjectId).subscribe(
+  
+  deny(timesheetId: string) {
+    this.timesheetService.deleteTimesheet(timesheetId).subscribe(
       data => {
         this.refresh();
-      }, err => {
-        alert('Error: ' + err.error.message);
       }
-    )
-  }
-
-  delete(id: any): void {
-    this.timesheetService.deleteTimesheet(id).subscribe(
-      data => {
-        this.refresh();
-      }, err => {
-        alert('Error: ' + err.error.message);
-      }
-    )
+    );
   }
 
 }

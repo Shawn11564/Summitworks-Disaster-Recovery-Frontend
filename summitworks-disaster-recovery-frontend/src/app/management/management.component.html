@@ -3,12 +3,6 @@
          class="btn btn-primary"
          (click)="refresh()"
     >Refresh</button>
-    <!-- <div class="float-end">
-        <button
-            class="btn btn-success"
-            (click)="addRow()"
-        >Add +</button>
-    </div> -->
     <table *ngIf="users.length != 0; else noTable" class="table table-dark">
         <thead>
             <tr>
@@ -29,15 +23,6 @@
                 <td>{{user.email}}</td>
                 <td>{{user.roles | json}}</td>
                 <td>
-                    <button
-                        class="btn btn-primary"
-                    >View</button>
-                    &nbsp;
-                    <button
-                        class="btn btn-warning"
-                        (click)="edit(user.id)"
-                    >Edit</button>
-                    &nbsp;
                     <button
                         class="btn btn-danger"
                         (click)="delete(user.id)"

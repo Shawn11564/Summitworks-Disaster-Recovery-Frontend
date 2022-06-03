@@ -66,6 +66,7 @@ export class SiteobjectComponent implements OnInit {
   }
 
   delete(id: any): void {
+    console.log('deleting: ' + id);
     this.objectService.deleteObject(id).subscribe(
       data => {
         this.refresh();

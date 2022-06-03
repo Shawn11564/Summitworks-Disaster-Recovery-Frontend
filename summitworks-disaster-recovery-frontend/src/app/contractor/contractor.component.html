@@ -29,8 +29,8 @@
             <div class="form-group" id="labor">
                 <div class="d-flex flex-column">
                     <h4>Job One</h4>
-                    <select ng-model="jobOneCode">
-                        <option [ngValue]="null" disabled>Code</option>
+                    <select ng-model="jobOneCode" formControlName="jobOneCode">
+                        <option [ngValue]="timesheetForm.get('jobOneCode')" disabled>Code</option>
                         <option *ngFor="let code of jobs" [ngValue]="code">{{code}}</option>
                     </select>
                     <label for="jobOneHours">Hours Worked</label>
@@ -39,8 +39,8 @@
                 </div>
                 <div class="d-flex flex-column">
                     <h4>Job Two</h4>
-                    <select ng-model="jobTwoCode">
-                        <option [ngValue]="null" disabled>Code</option>
+                    <select ng-model="jobTwoCode" formControlName="jobTwoCode">
+                        <option [ngValue]="timesheetForm.get('jobTwoCode')" disabled>Code</option>
                         <option *ngFor="let code of jobs" [ngValue]="code">{{code}}</option>
                     </select>
                     <label for="jobTwoHours">Hours Worked</label>
@@ -49,8 +49,8 @@
                 </div>
                 <div class="d-flex flex-column">
                     <h4>Job Three</h4>
-                    <select ng-model="jobThreeCode">
-                        <option [ngValue]="null" disabled>Code</option>
+                    <select ng-model="jobThreeCode" formControlName="jobThreeCode">
+                        <option [ngValue]="timesheetForm.get('jobThreeCode')" disabled>Code</option>
                          <option *ngFor="let code of jobs" [ngValue]="code">{{code}}</option>
                     </select>
                     <label for="jobThreeHours">Hours Worked</label>
@@ -61,8 +61,8 @@
             <div class="form-group" id="labor">
                 <div class="d-flex flex-column">
                     <h4>Machine One</h4>
-                    <select ng-model="machineOneCode">
-                        <option [ngValue]="null" disabled>Code</option>
+                    <select ng-model="machineOneCode" formControlName="machineOneCode">
+                        <option [ngValue]="timesheetForm.get('machineOneCode')" disabled>Code</option>
                         <option *ngFor="let code of machines" [ngValue]="code">{{code}}</option>
                     </select>
                     <label for="machineOneHours">Hours Used</label>
@@ -71,8 +71,8 @@
                 </div>
                 <div class="d-flex flex-column">
                     <h4>Machine Two</h4>
-                    <select ng-model="machineTwoCode">
-                        <option [ngValue]="null" disabled>Code</option>
+                    <select ng-model="machineTwoCode" formControlName="machineTwoCode">
+                        <option [ngValue]="timesheetForm.get('machineTwoCode')" disabled>Code</option>
                         <option *ngFor="let code of machines" [ngValue]="code">{{code}}</option>
                     </select>
                     <label for="machineTwoHours">Hours Used</label>
@@ -81,8 +81,8 @@
                 </div>
                 <div class="d-flex flex-column">
                     <h4>Machine Three</h4>
-                    <select ng-model="machineThreeCode">
-                        <option [ngValue]="null" disabled>Code</option>
+                    <select ng-model="machineThreeCode" formControlName="machineThreeCode">
+                        <option [ngValue]="timesheetForm.get('machineThreeCode')" disabled>Code</option>
                         <option *ngFor="let code of machines" [ngValue]="code">{{code}}</option>
                     </select>
                     <label for="machineThreeHours">Hours Used</label>
@@ -92,7 +92,7 @@
         </form>
     </div>
     <div class="float-end">
-        <button class="btn btn-success" (click)="clearForm()">Submit</button>
+        <button class="btn btn-success" (click)="onSubmit()">Submit</button>
         &nbsp;
         <button class="btn btn-danger" (click)="clearForm()">Clear</button>
     </div>

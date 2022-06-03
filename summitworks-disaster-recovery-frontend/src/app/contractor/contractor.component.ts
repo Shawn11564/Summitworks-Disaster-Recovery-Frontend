@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { SiteobjectService } from '../_services/siteobject.service';
+import { TimesheetService } from '../_services/timesheet.service';
 
 @Component({
   selector: 'app-contractor',
@@ -30,7 +31,7 @@ export class ContractorComponent implements OnInit {
     machineThreeHours: '',
   });
 
-  constructor(private formBuilder: FormBuilder, private siteObjects: SiteobjectService) { }
+  constructor(private formBuilder: FormBuilder, private siteObjects: SiteobjectService, private timesheetService: TimesheetService) { }
 
   ngOnInit(): void {
     this.siteObjects.getObjects().subscribe(
@@ -46,6 +47,17 @@ export class ContractorComponent implements OnInit {
         alert('Error: ' + err.error.message);
       }
     );
+  }
+
+  onSubmit() {
+    this.timesheetService.createTimesheet(this.timesheetForm.value).subscribe(
+      data => {
+        alert('Timesheet created!');
+      }, err => {
+        alert('Error saving object: ' + err.error.message);
+      }
+    )
+    this.clearForm();
   }
 
   clearForm() {

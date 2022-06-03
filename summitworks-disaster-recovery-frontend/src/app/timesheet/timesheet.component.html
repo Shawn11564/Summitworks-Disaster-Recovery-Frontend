@@ -1,75 +1,55 @@
 <div class="container">
+    <h1>Disaster Recovery Timesheet Approvals</h1>
     <button class="btn btn-primary" (click)="refresh()">Refresh</button>
-    <div class="float-end">
-        <button class="btn btn-success" (click)="openForm()">Add +</button>
-    </div>
-    <table *ngIf="objects.length != 0; else noTable" class="table table-dark">
+    <!-- Data table -->
+    <table *ngIf="rawTimesheets.length != 0; else noTable" class="table table-dark">
         <thead>
             <tr>
-                <td>Code</td>
-                <td>Type</td>
-                <td>Description</td>
-                <td>Hourly Rate</td>
-                <td>Max Hours Per-Day</td>
+                <td>Id</td>
+                <td>Contractor</td>
+                <td>Site Code</td>
+                <!-- <td>Jobs and Machines</td> -->
+                <td>Total Hours Worked</td>
+                <td>Total Cost</td>
+                <td>Status</td>
                 <td></td>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let obj of objects;
+            <tr *ngFor="let timesheet of rawTimesheets;
                                 let o = odd;
                                 let e = even;" [ngClass]="{ 'odd-line': o, 'even-line': e}">
-                <td>{{obj.code}}</td>
-                <td>{{obj.type}}</td>
-                <td>{{obj.description}}</td>
-                <td>{{obj.hourlyRate}}</td>
-                <td>{{obj.maxHoursPerDay}}</td>
+                <td>{{timesheet.id}}</td>
+                <td>{{timesheet.contractorName}}</td>
+                <td>{{timesheet.siteCode}}</td>
+                <!-- <td>
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <td>Code</td>
+                                <td>Hours Worked</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let job of timesheet.siteObject;">
+                                <td>{{job.code}}</td>
+                                <td>{{job.hoursWorked}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td> -->
+                <td>{{getTotalHours(timesheet.id)}}</td>
+                <td>{{getTotalCost(timesheet.id) | currency}}</td>
+                <td>{{timesheet.status}}</td>
                 <td>
-                    <button class="btn btn-warning" (click)="edit(obj.code)">Edit</button>
+                    <button class="btn btn-success" (click)="approve(timesheet.id)">Approve</button>
                     &nbsp;
-                    <button class="btn btn-danger" (click)="delete(obj.code)">Delete</button>
+                    <button class="btn btn-danger" (click)="deny(timesheet.id)">Deny</button>
                 </td>
             </tr>
         </tbody>
     </table>
     <ng-template #noTable>
-        No site objects found!
+        No timesheets found!
     </ng-template>
-    <div class="form" id="form">
-        <form [formGroup]="timesheetForm" (ngSubmit)="onSubmit()" class="bg-light">
-            <h2>Add a new site object</h2>
-            <div class="form-group">
-                <label for="code">Code</label>
-                <input class="form-control" id="code" type="text" formControlName="code" required>
-            </div>
-            &nbsp;
-            <div class="form-group">
-                <label for="type">Type</label>
-                <select name="type" class="form-select" formControlName="type" required>
-                    <option name="machine">Machine</option>
-                    <option name="job">Job</option>
-                </select>
-            </div>
-            &nbsp;
-            <div class="form-group">
-                <label for="description">Description</label>
-                <input class="form-control" id="description" type="text" formControlName="description" required>
-            </div>
-            &nbsp;
-            <div class="form-group">
-                <label for="hourlyRate">Hourly Rate</label>
-                <input class="form-control" id="hourlyRate" type="number" formControlName="hourlyRate" required>
-            </div>
-            &nbsp;
-            <div class="form-group">
-                <label for="maxHoursPerDay">Max Hours Per-Day</label>
-                <input class="form-control" id="maxHoursPerDay" type="number" formControlName="maxHoursPerDay" required>
-            </div>
-            &nbsp;
-            <div class="form-group">
-                <button type="submit" class="btn btn-success">Create</button>
-                &nbsp;
-                <button type="button" class="btn btn-danger" (click)="closeForm()">Cancel</button>
-            </div>
-        </form>
-    </div>
 </div>
