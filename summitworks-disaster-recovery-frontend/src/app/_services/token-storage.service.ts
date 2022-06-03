@@ -1,4 +1,3 @@
-import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
 import { Injectable } from '@angular/core';
 
 const TOKEN_KEY = "auth-token";

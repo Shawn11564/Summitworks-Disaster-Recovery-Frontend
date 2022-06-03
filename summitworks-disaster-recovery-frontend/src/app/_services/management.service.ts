@@ -1,8 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { settings } from 'cluster';
 import { Observable } from 'rxjs';
-import { SettingsService } from './settings.service';
 import { TokenStorageService } from './token-storage.service';
 
 const USERS_API = 'http://3.91.6.210:8080/api/users/admin/';
@@ -15,7 +13,7 @@ const HTTP_OPTIONS = {
 })
 export class ManagementService {
 
-  constructor(private http: HttpClient, private token: TokenStorageService, private settings: SettingsService) { }
+  constructor(private http: HttpClient, private token: TokenStorageService) { }
 
   getUsers(): Observable<any> {
     return this.http.get(USERS_API + 'all', HTTP_OPTIONS);
