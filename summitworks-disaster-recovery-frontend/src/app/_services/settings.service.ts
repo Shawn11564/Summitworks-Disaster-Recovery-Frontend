@@ -12,4 +12,8 @@ export class SettingsService {
     return this.token.getUser().roles.includes('ADMIN');
   }
 
+  getIp(): string {
+    return '3.91.6.210';
+  }
+
 }

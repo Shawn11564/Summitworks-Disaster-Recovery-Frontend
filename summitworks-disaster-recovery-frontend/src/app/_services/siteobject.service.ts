@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const OBJECTS_API = 'http://localhost:8080/api/objects/';
+const OBJECTS_API = 'http://3.91.6.210:8080/api/objects/';
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
